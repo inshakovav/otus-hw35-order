@@ -2,3 +2,14 @@ spring:
   application:
     name: order
 
+  kafka:
+    bootstrap-servers: localhost:29092
+    consumer:
+      auto-offset-reset: earliest
+    template:
+      default-topic: my-topic
+server:
+  port: 8081
+
+
+
