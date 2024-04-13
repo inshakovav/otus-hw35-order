@@ -1,7 +1,8 @@
 CREATE TABLE order_scheme.order
 (
     id   bigserial,
-    name text,
+    name text NOT NULL ,
+    status text NOT NULL ,
     CONSTRAINT pk_order_id PRIMARY KEY (id)
 );
 

@@ -1,6 +1,7 @@
 package com.example.order;
 
 import com.example.order.entity.OrderEntity;
+import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -20,12 +21,12 @@ class OrderApplicationTests {
 
     @Test
     void contextLoads() {
-        OrderEntity order = new OrderEntity();
-        order.setName("fistname");
-
         List<OrderEntity> userEntities = orderRepository.findAll();
         log.info("Read users={}", userEntities);
 
+        OrderEntity order = new OrderEntity();
+        order.setName("fistname");
+        order.setStatus(OrderStatus.PENDING);
         orderRepository.save(order);
         log.info("New order saved");
 
