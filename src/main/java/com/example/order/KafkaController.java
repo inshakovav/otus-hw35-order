@@ -14,6 +14,13 @@ public class KafkaController {
 
     @PostMapping("/messages")
     public void sendMessageToKafka(@RequestBody String message) {
+
         producerService.sendMessage(message);
+    }
+
+    @PostMapping("/messages2")
+    public void sendMessageToKafka2(@RequestBody String message) {
+
+        producerService.sendMessage2(message);
     }
 }

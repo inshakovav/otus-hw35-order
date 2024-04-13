@@ -1,0 +1,11 @@
+server:
+  port: 8000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5440/db_otus_30
+    username: postgres
+    password: postgres
+#  flyway:
+#    enabled: true
+#    schemas: scheme

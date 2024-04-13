@@ -1,6 +1,19 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: order
+
+  datasource:
+    url: jdbc:postgresql://my-release-postgresql.default.svc.cluster.local:5432/db_otus_30
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    hikari:
+      leak-detection-threshold: 10000
+  flyway:
+    enabled: true
+    schemas: order_scheme
 
   kafka:
     bootstrap-servers: localhost:29092
@@ -8,8 +21,7 @@ spring:
       auto-offset-reset: earliest
     template:
       default-topic: my-topic
-server:
-  port: 8081
+
 
 
 
