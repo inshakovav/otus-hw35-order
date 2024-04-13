@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.order.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

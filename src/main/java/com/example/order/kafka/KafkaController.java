@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.order.kafka;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

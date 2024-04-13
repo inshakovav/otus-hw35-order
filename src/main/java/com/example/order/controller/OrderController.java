@@ -4,6 +4,7 @@ import com.example.order.dto.OrderDto;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
+import com.example.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.List;
 public class OrderController {
 
     private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
     @GetMapping
     public List<OrderEntity> getAll() {
@@ -23,11 +25,7 @@ public class OrderController {
 
     @PostMapping
     public OrderEntity add(@RequestBody OrderDto dto) {
-        OrderEntity entity = new OrderEntity();
-        entity.setName(dto.getName());
-        entity.setStatus(OrderStatus.PENDING);
-
-        OrderEntity dbEntity = orderRepository.save(entity);
+        OrderEntity dbEntity = orderService.process(dto);
         return dbEntity;
     }
 }

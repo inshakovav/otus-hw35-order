@@ -1,14 +1,17 @@
 CREATE TABLE order_scheme.order
 (
-    id   bigserial,
-    name text NOT NULL ,
-    status text NOT NULL ,
+    id         bigserial,
+    created_at timestamp NOT NULL,
+    updated_at timestamp NOT NULL,
+    name       text      NOT NULL,
+    status     text      NOT NULL,
     CONSTRAINT pk_order_id PRIMARY KEY (id)
 );
 
 CREATE TABLE order_scheme.order_event
 (
     id         bigserial,
+    created_at timestamp NOT NULL,
     order_id   integer,
     name       text,
     event_type text,

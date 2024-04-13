@@ -1,5 +1,6 @@
-package com.example.order;
+package com.example.order.kafka;
 
+import com.example.order.entity.OrderEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class KafkaProducerService {
 
     public void sendMessage2(String message) {
         kafkaTemplate.send("my-topic2", message);
+    }
+
+    public void sendOrder(OrderEntity message) {
+        kafkaTemplate.send("my-topic", message);
     }
 }
