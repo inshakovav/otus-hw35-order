@@ -1,7 +1,7 @@
 package com.example.order;
 
-import com.example.order.entity.UserEntity;
-import com.example.order.repository.UserRepository;
+import com.example.order.entity.OrderEntity;
+import com.example.order.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,20 @@ import java.util.List;
 class OrderApplicationTests {
 
     @Autowired
-    UserRepository userRepository;
+    OrderRepository orderRepository;
 
     @Test
     void contextLoads() {
-        UserEntity user = new UserEntity();
-        user.setId(1L);
-        user.setFirstName("fistname");
-        user.setUsername("username");
+        OrderEntity order = new OrderEntity();
+        order.setName("fistname");
 
-        List<UserEntity> userEntities = userRepository.findAll();
+        List<OrderEntity> userEntities = orderRepository.findAll();
         log.info("Read users={}", userEntities);
 
-        userRepository.save(user);
-        log.info("New user saved");
+        orderRepository.save(order);
+        log.info("New order saved");
 
-        List<UserEntity> userEntities1 = userRepository.findAll();
+        List<OrderEntity> userEntities1 = orderRepository.findAll();
         log.info("Read users={}", userEntities1);
     }
 
