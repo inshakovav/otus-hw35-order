@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class OrderEntity {
 
     @Id
