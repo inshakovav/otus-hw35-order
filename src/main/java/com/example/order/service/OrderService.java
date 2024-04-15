@@ -1,5 +1,6 @@
 package com.example.order.service;
 
+import com.example.order.dto.OrderCreatedDto;
 import com.example.order.dto.OrderDto;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
@@ -17,7 +18,11 @@ public class OrderService {
 
     public OrderEntity process(OrderDto dto) {
         OrderEntity dbEntity = addNew(dto);
-        kafkaProducerService.sendOrder(dbEntity);
+
+        OrderCreatedDto orderCreatedDto= new OrderCreatedDto();
+        orderCreatedDto.setId(dbEntity.getId());
+        orderCreatedDto.setName(dbEntity.getName());
+        kafkaProducerService.sendOrder(orderCreatedDto);
         return dbEntity;
     }
 
