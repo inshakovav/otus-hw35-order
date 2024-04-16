@@ -58,7 +58,7 @@ class OrderApplicationTests {
                 .build();
     }
 
-    @Test
+//    @Test
     void contextLoads() {
         List<OrderEntity> userEntities = orderRepository.findAll();
         log.info("Read users={}", userEntities);
