@@ -4,6 +4,7 @@ import com.example.order.dto.OrderCreateDto;
 import com.example.order.entity.OrderEntity;
 import com.example.order.repository.OrderRepository;
 import com.example.order.service.OrderService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

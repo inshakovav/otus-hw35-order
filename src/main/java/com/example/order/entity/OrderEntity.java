@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
@@ -28,7 +29,11 @@ public class OrderEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    private String description;
+    private String orderDescription;
+    private Long productId;
+    private BigDecimal productPrice;
+    private BigDecimal productQuantity;
+    private String deliveryAddress;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

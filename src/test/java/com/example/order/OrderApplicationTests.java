@@ -55,7 +55,7 @@ class OrderApplicationTests {
         log.info("Read users={}", userEntities);
 
         OrderEntity order = new OrderEntity();
-        order.setDescription("fistname");
+        order.setOrderDescription("fistname");
         order.setStatus(OrderStatus.PENDING);
         orderRepository.save(order);
         log.info("New order saved");
@@ -84,6 +84,10 @@ class OrderApplicationTests {
 
         OrderCreatedMessage receivedMessage = consumer.getReceivedMessage();
         assertEquals(receivedMessage.getOrderId(), lastOrder.getId());
-        assertEquals(receivedMessage.getOrderDescription(),lastOrder.getDescription());
+        assertEquals(receivedMessage.getOrderDescription(),lastOrder.getOrderDescription());
+        assertEquals(receivedMessage.getProductId(), lastOrder.getProductId());
+        assertEquals(receivedMessage.getProductPrice().stripTrailingZeros(), lastOrder.getProductPrice().stripTrailingZeros());
+        assertEquals(receivedMessage.getProductQuantity().stripTrailingZeros(), lastOrder.getProductQuantity().stripTrailingZeros());
+        assertEquals(receivedMessage.getDeliveryAddress(), lastOrder.getDeliveryAddress());
     }
 }
