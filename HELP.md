@@ -2,10 +2,10 @@
 
 ### REST
 ```bash
-curl -H 'Content-Type: application/json' \
-     -d '{ "message":"foo"}' \
-     -X POST \
-     http://localhost:8000/messages
+#curl -H 'Content-Type: application/json' \
+#     -d '{ "message":"foo"}' \
+#     -X POST \
+#     http://localhost:8000/messages
 ```
 
 #### Get all Orders
@@ -16,7 +16,7 @@ curl http://localhost:8000/order | json_pp
 #### Add an Order
 ```bash
 curl -H 'Content-Type: application/json' \
-     -d '{ "name":"foo"}' \
+     -d '{ "description":"Order description"}' \
      -X POST \
      http://localhost:8000/order | json_pp
 ```

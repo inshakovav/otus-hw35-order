@@ -28,7 +28,7 @@ public class OrderEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
-    private String name;
+    private String description;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

@@ -55,7 +55,7 @@ class OrderApplicationTests {
         log.info("Read users={}", userEntities);
 
         OrderEntity order = new OrderEntity();
-        order.setName("fistname");
+        order.setDescription("fistname");
         order.setStatus(OrderStatus.PENDING);
         orderRepository.save(order);
         log.info("New order saved");
@@ -71,7 +71,7 @@ class OrderApplicationTests {
         // act
         mockMvc.perform(
                 post("http://localhost:8000/order")
-                        .content("{ \"name\":\"foo\"}")
+                        .content("{ \"description\":\"My order 1 description\"}")
                         .contentType(MediaType.APPLICATION_JSON)
         );
 
@@ -84,6 +84,6 @@ class OrderApplicationTests {
 
         OrderCreatedMessage receivedMessage = consumer.getReceivedMessage();
         assertEquals(receivedMessage.getOrderId(), lastOrder.getId());
-        assertEquals(receivedMessage.getOrderName(),lastOrder.getName());
+        assertEquals(receivedMessage.getOrderDescription(),lastOrder.getDescription());
     }
 }

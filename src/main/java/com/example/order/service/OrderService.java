@@ -21,14 +21,14 @@ public class OrderService {
 
         OrderCreatedMessage orderCreatedMessage = new OrderCreatedMessage();
         orderCreatedMessage.setOrderId(dbEntity.getId());
-        orderCreatedMessage.setOrderName(dbEntity.getName());
+        orderCreatedMessage.setOrderDescription(dbEntity.getDescription());
         kafkaProducerService.sendOrder(orderCreatedMessage);
         return dbEntity;
     }
 
     public OrderEntity addNew(OrderDto dto) {
         OrderEntity entity = new OrderEntity();
-        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
         entity.setStatus(OrderStatus.PENDING);
         OrderEntity dbEntity = repository.save(entity);
         return dbEntity;
