@@ -71,7 +71,7 @@ class OrderApplicationTests {
         // act
         mockMvc.perform(
                 post("http://localhost:8000/order")
-                        .content("{ \"description\":\"My order 1 description\"}")
+                        .content("{ \"orderDescription\":\"Order description\", \"productId\":\"123\", \"productPrice\":\"5.1\", \"productQuantity\":\"2.0\", \"deliveryAddress\":\"г.Москва, ул. Тверская, д.1\"}")
                         .contentType(MediaType.APPLICATION_JSON)
         );
 

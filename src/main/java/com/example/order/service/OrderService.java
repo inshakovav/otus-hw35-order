@@ -1,7 +1,7 @@
 package com.example.order.service;
 
 import com.example.order.dto.OrderCreatedMessage;
-import com.example.order.dto.OrderDto;
+import com.example.order.dto.OrderCreateDto;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
 import com.example.order.kafka.KafkaProducerService;
@@ -16,7 +16,7 @@ public class OrderService {
     private final OrderRepository repository;
     private final KafkaProducerService kafkaProducerService;
 
-    public OrderEntity process(OrderDto dto) {
+    public OrderEntity process(OrderCreateDto dto) {
         OrderEntity dbEntity = addNew(dto);
 
         OrderCreatedMessage orderCreatedMessage = new OrderCreatedMessage();
@@ -26,9 +26,9 @@ public class OrderService {
         return dbEntity;
     }
 
-    public OrderEntity addNew(OrderDto dto) {
+    public OrderEntity addNew(OrderCreateDto dto) {
         OrderEntity entity = new OrderEntity();
-        entity.setDescription(dto.getDescription());
+        entity.setDescription(dto.getOrderDescription());
         entity.setStatus(OrderStatus.PENDING);
         OrderEntity dbEntity = repository.save(entity);
         return dbEntity;

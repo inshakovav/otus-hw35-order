@@ -16,7 +16,7 @@ curl http://localhost:8000/order | json_pp
 #### Add an Order
 ```bash
 curl -H 'Content-Type: application/json' \
-     -d '{ "description":"Order description"}' \
+     -d '{ "orderDescription":"Order description", "productId":"123", "productPrice":"5.1", "productQuantity":"2.0", "deliveryAddress":"г.Москва, ул. Тверская, д.1"}' \
      -X POST \
      http://localhost:8000/order | json_pp
 ```

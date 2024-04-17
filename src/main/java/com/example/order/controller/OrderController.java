@@ -1,8 +1,7 @@
 package com.example.order.controller;
 
-import com.example.order.dto.OrderDto;
+import com.example.order.dto.OrderCreateDto;
 import com.example.order.entity.OrderEntity;
-import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
 import com.example.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public OrderEntity add(@RequestBody OrderDto dto) {
+    public OrderEntity add(@RequestBody OrderCreateDto dto) {
         OrderEntity dbEntity = orderService.process(dto);
         return dbEntity;
     }
