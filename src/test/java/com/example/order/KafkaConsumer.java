@@ -1,6 +1,6 @@
 package com.example.order;
 
-import com.example.order.dto.OrderCreatedDto;
+import com.example.order.dto.OrderCreatedMessage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,10 +15,10 @@ public class KafkaConsumer {
 
     private CountDownLatch latch = new CountDownLatch(1);
     private String payload;
-    private OrderCreatedDto receivedMessage;
+    private OrderCreatedMessage receivedMessage;
 
     @KafkaListener(topics = "hw30.order.created", groupId = "my-group")
-    public void receive(OrderCreatedDto message) {
+    public void receive(OrderCreatedMessage message) {
         log.info("received payload='{}'", message.toString());
 //        payload = message.toString();
         receivedMessage = message;

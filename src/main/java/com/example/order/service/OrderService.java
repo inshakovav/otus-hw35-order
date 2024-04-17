@@ -1,6 +1,6 @@
 package com.example.order.service;
 
-import com.example.order.dto.OrderCreatedDto;
+import com.example.order.dto.OrderCreatedMessage;
 import com.example.order.dto.OrderDto;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
@@ -19,10 +19,10 @@ public class OrderService {
     public OrderEntity process(OrderDto dto) {
         OrderEntity dbEntity = addNew(dto);
 
-        OrderCreatedDto orderCreatedDto= new OrderCreatedDto();
-        orderCreatedDto.setId(dbEntity.getId());
-        orderCreatedDto.setName(dbEntity.getName());
-        kafkaProducerService.sendOrder(orderCreatedDto);
+        OrderCreatedMessage orderCreatedMessage = new OrderCreatedMessage();
+        orderCreatedMessage.setOrderId(dbEntity.getId());
+        orderCreatedMessage.setOrderName(dbEntity.getName());
+        kafkaProducerService.sendOrder(orderCreatedMessage);
         return dbEntity;
     }
 

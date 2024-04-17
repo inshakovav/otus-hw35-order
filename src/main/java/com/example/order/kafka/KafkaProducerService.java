@@ -1,9 +1,7 @@
 package com.example.order.kafka;
 
-import com.example.order.dto.OrderCreatedDto;
-import com.example.order.entity.OrderEntity;
+import com.example.order.dto.OrderCreatedMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class KafkaProducerService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void sendOrder(OrderCreatedDto message) {
+    public void sendOrder(OrderCreatedMessage message) {
         kafkaTemplate.send("hw30.order.created", message);
     }
 }

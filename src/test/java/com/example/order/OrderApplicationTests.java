@@ -1,30 +1,21 @@
 package com.example.order;
 
-import com.example.order.dto.OrderCreatedDto;
+import com.example.order.dto.OrderCreatedMessage;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
-import com.example.order.kafka.KafkaConsumerService;
 import com.example.order.repository.OrderRepository;
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.apache.kafka.common.utils.Utils.sleep;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -47,8 +38,8 @@ class OrderApplicationTests {
     private KafkaConsumer consumer;
 
     // To disable second @KafkaListener
-    @MockBean
-    KafkaConsumerService kafkaConsumerService;
+//    @MockBean
+//    KafkaConsumerService kafkaConsumerService;
 
     MockMvc mockMvc;
 
@@ -91,8 +82,8 @@ class OrderApplicationTests {
         boolean messageConsumed = consumer.getLatch().await(10, TimeUnit.SECONDS);
         assertTrue(messageConsumed);
 
-        OrderCreatedDto receivedMessage = consumer.getReceivedMessage();
-        assertEquals(receivedMessage.getId(), lastOrder.getId());
-        assertEquals(receivedMessage.getName(),lastOrder.getName());
+        OrderCreatedMessage receivedMessage = consumer.getReceivedMessage();
+        assertEquals(receivedMessage.getOrderId(), lastOrder.getId());
+        assertEquals(receivedMessage.getOrderName(),lastOrder.getName());
     }
 }
