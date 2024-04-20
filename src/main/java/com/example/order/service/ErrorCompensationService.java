@@ -20,14 +20,14 @@ public class ErrorCompensationService {
 
     @Transactional
     public void executePaymentReject(PaymentRejectedMessage message) {
-        Optional<OrderEntity> optionalOrder = orderRepository.findById(message.getOrderId());
-        if(optionalOrder.isEmpty()) {
-            log.warn("Wrong payment rejection. Can't find order by payment order id: {}", message);
-        }
-
+        OrderEntity order = getOrder(message);
         log.info("Payment was rejected: {}", message);
-        OrderEntity order = optionalOrder.get();
         order.setStatus(OrderStatus.REJECTED_BY_PAYMENT);
         orderRepository.save(order);
+    }
+
+    private OrderEntity getOrder(PaymentRejectedMessage message) {
+        return orderRepository.findById(message.getOrderId())
+                .orElseThrow(() -> new NumberFormatException("Wrong payment rejection. Can't find order by payment order id" + message));
     }
 }
