@@ -3,9 +3,12 @@ server:
 
 order:
   kafka:
+    message-group-name: order-group
     order-created-topic: hw30.order.created
     payment-succeeded-topic: hw30.payment.succeeded
     payment-rejected-topic: hw30.payment.rejected
+    warehouse-rejected-topic: hw30.warehouse.rejected
+    delivery-rejected-topic: hw30.delivery.rejected
 
 spring:
   application:

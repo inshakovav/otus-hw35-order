@@ -19,7 +19,7 @@ public class KafkaConsumerService {
 
     private final ErrorCompensationService errorCompensationService;
 
-    @KafkaListener(topics = "${order.kafka.payment-rejected-topic}", groupId = "my-group")
+    @KafkaListener(topics = "${order.kafka.payment-rejected-topic}", groupId = "${order.kafka.message-group-name}")
     public void receivePaymentRejected(PaymentRejectedMessage message) {
         errorCompensationService.executePaymentReject(message);
     }
