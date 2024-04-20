@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ErrorCompensationService {
+public class SageCompensationService {
 
     private final OrderRepository orderRepository;
 
