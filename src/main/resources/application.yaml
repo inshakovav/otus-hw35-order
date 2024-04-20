@@ -1,6 +1,12 @@
 server:
   port: 8081
 
+order:
+  kafka:
+    order-created-topic: hw30.order.created
+    payment-succeeded-topic: hw30.payment.succeeded
+    payment-rejected-topic: hw30.payment.rejected
+
 spring:
   application:
     name: order

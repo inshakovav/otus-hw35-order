@@ -3,6 +3,7 @@ package com.example.order;
 import com.example.order.dto.OrderCreatedMessage;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class KafkaConsumer {
     private String payload;
     private OrderCreatedMessage receivedMessage;
 
-    @KafkaListener(topics = "hw30.order.created", groupId = "my-group")
+    @KafkaListener(topics = "${order.kafka.order-created-topic}", groupId = "my-group")
     public void receive(OrderCreatedMessage message) {
         log.info("received payload='{}'", message.toString());
 //        payload = message.toString();
