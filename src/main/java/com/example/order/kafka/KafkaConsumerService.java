@@ -1,6 +1,8 @@
 package com.example.order.kafka;
 
+import com.example.order.dto.DeliveryRejectedMessage;
 import com.example.order.dto.PaymentRejectedMessage;
+import com.example.order.dto.WarehouseReservationRejectedMessage;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
@@ -22,5 +24,15 @@ public class KafkaConsumerService {
     @KafkaListener(topics = "${order.kafka.payment-rejected-topic}", groupId = "${order.kafka.message-group-name}")
     public void receivePaymentRejected(PaymentRejectedMessage message) {
         errorCompensationService.executePaymentReject(message);
+    }
+
+    @KafkaListener(topics = "${order.kafka.warehouse-rejected-topic}", groupId = "${order.kafka.message-group-name}")
+    public void receiveWarehouseRejected(WarehouseReservationRejectedMessage message) {
+        errorCompensationService.executeWarehouseReject(message);
+    }
+
+    @KafkaListener(topics = "${order.kafka.delivery-rejected-topic}", groupId = "${order.kafka.message-group-name}")
+    public void receiveDeliveryRejected(DeliveryRejectedMessage message) {
+        errorCompensationService.executeDeliveryReject(message);
     }
 }
