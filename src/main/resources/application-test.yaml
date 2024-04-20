@@ -1,0 +1,20 @@
+#server:
+#  port: 8000
+
+payment:
+  kafka:
+    message-group-name: payment-group-payment-test
+    order-created-topic: hw30.order.created-payment-test
+    payment-succeeded-topic: hw30.payment.succeeded-payment-test
+    payment-rejected-topic: hw30.payment.rejected-payment-test
+    warehouse-rejected-topic: hw30.warehouse.rejected-payment-test
+    delivery-rejected-topic: hw30.delivery.rejected-payment-test
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5440/db_otus_30
+    username: postgres
+    password: postgres
+#  flyway:
+#    enabled: true
+#    schemas: scheme

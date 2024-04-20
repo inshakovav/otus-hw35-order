@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 @Slf4j
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 class OrderApplicationTests {
 
     @Autowired

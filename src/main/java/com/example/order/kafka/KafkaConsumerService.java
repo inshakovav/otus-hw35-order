@@ -23,16 +23,28 @@ public class KafkaConsumerService {
 
     @KafkaListener(topics = "${order.kafka.payment-rejected-topic}", groupId = "${order.kafka.message-group-name}")
     public void receivePaymentRejected(PaymentRejectedMessage message) {
-        errorCompensationService.executePaymentReject(message);
+        try {
+            errorCompensationService.executePaymentReject(message);
+        } catch (Exception e) {
+            log.warn("Kafka unknown error Order processing: ", message);
+        }
     }
 
     @KafkaListener(topics = "${order.kafka.warehouse-rejected-topic}", groupId = "${order.kafka.message-group-name}")
     public void receiveWarehouseRejected(WarehouseReservationRejectedMessage message) {
-        errorCompensationService.executeWarehouseReject(message);
+        try {
+            errorCompensationService.executeWarehouseReject(message);
+        } catch (Exception e) {
+            log.warn("Kafka unknown error Order processing: ", message);
+        }
     }
 
     @KafkaListener(topics = "${order.kafka.delivery-rejected-topic}", groupId = "${order.kafka.message-group-name}")
     public void receiveDeliveryRejected(DeliveryRejectedMessage message) {
-        errorCompensationService.executeDeliveryReject(message);
+        try {
+            errorCompensationService.executeDeliveryReject(message);
+        } catch (Exception e) {
+            log.warn("Kafka unknown error Order processing: ", message);
+        }
     }
 }
