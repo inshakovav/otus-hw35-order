@@ -6,6 +6,7 @@ import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,21 +50,7 @@ class OrderApplicationTests {
                 .build();
     }
 
-//    @Test
-    void contextLoads() {
-        List<OrderEntity> userEntities = orderRepository.findAll();
-        log.info("Read users={}", userEntities);
-
-        OrderEntity order = new OrderEntity();
-        order.setOrderDescription("fistname");
-        order.setStatus(OrderStatus.PENDING);
-        orderRepository.save(order);
-        log.info("New order saved");
-
-        List<OrderEntity> userEntities1 = orderRepository.findAll();
-        log.info("Read users={}", userEntities1);
-    }
-
+    @Disabled("Only for manual start")
     @Test
     void createOrder() throws Exception {
         // before
