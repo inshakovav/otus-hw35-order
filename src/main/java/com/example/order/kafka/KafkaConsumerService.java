@@ -1,5 +1,6 @@
 package com.example.order.kafka;
 
+import com.example.order.dto.DeliveryExecutedMessage;
 import com.example.order.dto.DeliveryRejectedMessage;
 import com.example.order.dto.PaymentRejectedMessage;
 import com.example.order.dto.WarehouseReservationRejectedMessage;
@@ -29,6 +30,15 @@ public class KafkaConsumerService {
     public void receiveWarehouseRejected(WarehouseReservationRejectedMessage message) {
         try {
             sageCompensationService.executeWarehouseReject(message);
+        } catch (Exception e) {
+            log.warn("Kafka unknown error Order processing: ", message);
+        }
+    }
+
+    @KafkaListener(topics = "${order.kafka.delivery-executed-topic}", groupId = "${order.kafka.message-group-name}")
+    public void receiveDeliveryExecuted(DeliveryExecutedMessage message) {
+        try {
+            sageCompensationService.executeDeliveryExecution(message);
         } catch (Exception e) {
             log.warn("Kafka unknown error Order processing: ", message);
         }

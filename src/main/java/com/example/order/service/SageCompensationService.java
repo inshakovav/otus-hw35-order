@@ -1,5 +1,6 @@
 package com.example.order.service;
 
+import com.example.order.dto.DeliveryExecutedMessage;
 import com.example.order.dto.DeliveryRejectedMessage;
 import com.example.order.dto.PaymentRejectedMessage;
 import com.example.order.dto.WarehouseReservationRejectedMessage;
@@ -39,6 +40,14 @@ public class SageCompensationService {
         OrderEntity order = findOrder(message.getOrderId());
         log.info("Delivery was rejected: {}", message);
         order.setStatus(OrderStatus.REJECTED_BY_DELIVERY);
+        orderRepository.save(order);
+    }
+
+    @Transactional
+    public void executeDeliveryExecution(DeliveryExecutedMessage message) {
+        OrderEntity order = findOrder(message.getOrderId());
+        log.info("Delivery was succeeded. ---Finish---: {}", message);
+        order.setStatus(OrderStatus.DELIVERY_SUCCEEDED);
         orderRepository.save(order);
     }
 
