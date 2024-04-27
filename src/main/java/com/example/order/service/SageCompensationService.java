@@ -7,10 +7,11 @@ import com.example.order.dto.WarehouseReservationRejectedMessage;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
