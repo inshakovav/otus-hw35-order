@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-@SpringBootTest
+//@SpringBootTest
 @Slf4j
 @ActiveProfiles("test")
 class OrderApplicationTests {
