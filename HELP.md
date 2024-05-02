@@ -21,12 +21,9 @@ curl -H 'Content-Type: application/json' \
      http://localhost:8000/order | json_pp
 ```
 
-### Todo
-0.5
-+ DB add tables
-+ Setup constrains
-+ Add DB initialize script
-
-0.5-1 Add REST POST for adding an Order
-Add Kafka Producer for sending Order
-Add Kafka test for Topic
+### Deployment
+```bash
+mvn package
+docker image build -t alxinsh/docker-java-hw30-order:1.0.5 .
+docker push alxinsh/docker-java-hw30-order:1.0.5
+```
