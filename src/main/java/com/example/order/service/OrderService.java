@@ -1,9 +1,8 @@
 package com.example.order.service;
 
-import com.example.order.exception.DuplicateException;
 import com.example.order.dto.DbToKafkaMapper;
-import com.example.order.dto.OrderCreatedMessage;
 import com.example.order.dto.OrderCreateDto;
+import com.example.order.dto.OrderCreatedMessage;
 import com.example.order.dto.RestDBMapper;
 import com.example.order.entity.OrderEntity;
 import com.example.order.entity.OrderStatus;
@@ -28,22 +27,22 @@ public class OrderService {
 
     public OrderEntity process(OrderCreateDto dto) {
         log.info("Create order: {}", dto);
-        checkDuplicate(dto);
+        Optional<OrderEntity> duplicate = checkDuplicate(dto);
+        if (duplicate.isPresent()) {
+            log.info("Find duplicate:{}", duplicate.get());
+            return duplicate.get();
+        }
         OrderEntity dbEntity = saveNew(dto);
         sendCreatedMessage(dbEntity);
         return dbEntity;
     }
 
-    private void checkDuplicate(OrderCreateDto dto) {
+    private Optional<OrderEntity> checkDuplicate(OrderCreateDto dto) {
         Timestamp bookingAtBefore5min = new Timestamp(dto.getBookingAt().getTime() - (5 * 60 * 1000));
-        Optional<OrderEntity> duplicate = repository.findFirstByProductIdAndProductQuantityAndBookingAtAfter(
+        return repository.findFirstByProductIdAndProductQuantityAndBookingAtAfter(
                 dto.getProductId(),
                 dto.getProductQuantity(),
                 bookingAtBefore5min);
-        if(duplicate.isPresent()) {
-            log.info("Find duplicate:{}", duplicate.get());
-            throw new DuplicateException("Product already booked: " + duplicate.get());
-        }
     }
 
     private void sendCreatedMessage(OrderEntity dbEntity) {
