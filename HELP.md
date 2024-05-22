@@ -14,9 +14,11 @@ curl http://localhost:8000/order | json_pp
 ```
 
 #### Add an Order
+Проверка идемпотентности. Если товар похожий уже создан, то данные в БД не сохраняются.
+Дубли ищутся по productId, productQuantity, BookingAt - 5 минут (через 5 минут можно создать заказ на туже позицию).
 ```bash
 curl -H 'Content-Type: application/json' \
-     -d '{ "orderDescription":"Order description", "productId":"123", "productPrice":"5.1", "productQuantity":"2.0", "deliveryAddress":"г.Москва, ул. Тверская, д.1"}' \
+     -d '{ "bookingAt":"2024-04-27T02:55:28.183+00:00", "orderDescription":"Order description", "productId":"123", "productPrice":"5.1", "productQuantity":"2.0", "deliveryAddress":"г.Москва, ул. Тверская, д.1"}' \
      -X POST \
      http://localhost:8000/order | json_pp
 ```

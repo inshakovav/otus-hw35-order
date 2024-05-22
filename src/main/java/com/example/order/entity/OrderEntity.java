@@ -28,6 +28,7 @@ public class OrderEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
+    private Timestamp bookingAt;
     private String orderDescription;
     private Long productId;
     private BigDecimal productPrice;

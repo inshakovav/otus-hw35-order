@@ -4,8 +4,12 @@ import com.example.order.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Optional;
+
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     OrderEntity findFirstByOrderByIdDesc();
-
+    Optional<OrderEntity> findFirstByProductIdAndProductQuantityAndBookingAtAfter(Long productId, BigDecimal productQuantity, Timestamp bookingAt);
 }
