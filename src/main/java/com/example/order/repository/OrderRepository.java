@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     OrderEntity findFirstByOrderByIdDesc();
-    Optional<OrderEntity> findFirstByProductIdAndProductQuantityAndBookingAtAfter(Long productId, BigDecimal productQuantity, Timestamp bookingAt);
+
+    Optional<OrderEntity> findFirstByAccountIdAndPriceAndBookingAt(Long accountId, BigDecimal price, Timestamp bookingAt);
 }

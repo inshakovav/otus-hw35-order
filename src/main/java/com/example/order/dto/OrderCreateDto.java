@@ -7,10 +7,7 @@ import java.sql.Timestamp;
 
 @Data
 public class OrderCreateDto {
+    Long accountId;
+    BigDecimal price;
     Timestamp bookingAt;
-    String orderDescription;
-    Long productId;
-    BigDecimal productPrice;
-    BigDecimal productQuantity;
-    String deliveryAddress;
 }

@@ -39,14 +39,18 @@ public class OrderService {
 
     private Optional<OrderEntity> checkDuplicate(OrderCreateDto dto) {
         Timestamp bookingAtBefore5min = new Timestamp(dto.getBookingAt().getTime() - (5 * 60 * 1000));
-        return repository.findFirstByProductIdAndProductQuantityAndBookingAtAfter(
-                dto.getProductId(),
-                dto.getProductQuantity(),
+        return repository.findFirstByAccountIdAndPriceAndBookingAt(
+                dto.getAccountId(),
+                dto.getPrice(),
                 bookingAtBefore5min);
     }
 
     private void sendCreatedMessage(OrderEntity dbEntity) {
-        OrderCreatedMessage orderCreatedMessage = dbToKafkaMapper.dbToKafka(dbEntity);
+        OrderCreatedMessage orderCreatedMessage = OrderCreatedMessage.builder()
+                .accountId(dbEntity.getAccountId())
+                .orderId(dbEntity.getId())
+                .orderPrice(dbEntity.getPrice())
+                .build();
         kafkaProducerService.sendOrder(orderCreatedMessage);
     }
 

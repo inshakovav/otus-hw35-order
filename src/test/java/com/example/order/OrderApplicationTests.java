@@ -2,11 +2,9 @@ package com.example.order;
 
 import com.example.order.dto.OrderCreatedMessage;
 import com.example.order.entity.OrderEntity;
-import com.example.order.entity.OrderStatus;
 import com.example.order.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,15 +14,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-//@SpringBootTest
+@SpringBootTest
 @Slf4j
 @ActiveProfiles("test")
 class OrderApplicationTests {
@@ -50,7 +48,7 @@ class OrderApplicationTests {
                 .build();
     }
 
-    @Disabled("Only for manual start")
+//    @Disabled("Only for manual start")
     @Test
     void createOrder() throws Exception {
         // before
@@ -58,7 +56,7 @@ class OrderApplicationTests {
         // act
         mockMvc.perform(
                 post("http://localhost:8000/order")
-                        .content("{ \"orderDescription\":\"Order description\", \"productId\":\"123\", \"productPrice\":\"5.1\", \"productQuantity\":\"2.0\", \"deliveryAddress\":\"г.Москва, ул. Тверская, д.1\"}")
+                        .content("{ \"accountId\":\"2\", \"price\":\"1.1\", \"bookingAt\":\"2024-04-27T02:55:28.183+00:00\"}")
                         .contentType(MediaType.APPLICATION_JSON)
         );
 
@@ -70,11 +68,12 @@ class OrderApplicationTests {
         assertTrue(messageConsumed);
 
         OrderCreatedMessage receivedMessage = consumer.getReceivedMessage();
+        assertEquals(receivedMessage.getAccountId(), lastOrder.getAccountId());
         assertEquals(receivedMessage.getOrderId(), lastOrder.getId());
-        assertEquals(receivedMessage.getOrderDescription(),lastOrder.getOrderDescription());
-        assertEquals(receivedMessage.getProductId(), lastOrder.getProductId());
-        assertEquals(receivedMessage.getProductPrice().stripTrailingZeros(), lastOrder.getProductPrice().stripTrailingZeros());
-        assertEquals(receivedMessage.getProductQuantity().stripTrailingZeros(), lastOrder.getProductQuantity().stripTrailingZeros());
-        assertEquals(receivedMessage.getDeliveryAddress(), lastOrder.getDeliveryAddress());
+
+        BigDecimal orderPrice = receivedMessage.getOrderPrice();
+        BigDecimal orderPriceRounded = orderPrice.setScale(2, RoundingMode.DOWN);
+        BigDecimal expectedOrderPrice = new BigDecimal(1.1).setScale(2, RoundingMode.DOWN);
+        assertEquals(expectedOrderPrice, orderPriceRounded);
     }
 }

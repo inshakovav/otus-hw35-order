@@ -28,13 +28,9 @@ public class OrderEntity {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
+    private Long accountId;
     private Timestamp bookingAt;
-    private String orderDescription;
-    private Long productId;
-    private BigDecimal productPrice;
-    private BigDecimal productQuantity;
-    private String deliveryAddress;
-
+    private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 }

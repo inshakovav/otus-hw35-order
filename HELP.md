@@ -26,6 +26,6 @@ curl -H 'Content-Type: application/json' \
 ### Deployment
 ```bash
 mvn package
-docker image build -t alxinsh/docker-java-hw30-order:1.0.6 .
-docker push alxinsh/docker-java-hw30-order:1.0.6
+docker image build -t alxinsh/docker-java-hw35-order:1.0.6 .
+docker push alxinsh/docker-java-hw35-order:1.0.6
 ```
