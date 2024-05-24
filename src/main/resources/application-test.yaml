@@ -1,15 +1,12 @@
 server:
   port: 8000
 
-payment:
+app:
   kafka:
-    message-group-name: payment-group-order-test
-    order-created-topic: hw35.order.created-order-test
-    payment-succeeded-topic: hw35.payment.succeeded-order-test
-    payment-rejected-topic: hw35.payment.rejected-order-test
-    warehouse-rejected-topic: hw35.warehouse.rejected-order-test
-    delivery-executed-topic: hw35.delivery.executed-order-test
-    delivery-rejected-topic: hw35.delivery.rejected-order-test
+    message-group-name: order-group-test
+    order-created-topic: hw35.order.created-test
+    payment-executed-topic: hw35.payment.executed-test
+    payment-rejected-topic: hw35.payment.rejected-test
 
 spring:
   datasource:

@@ -10,10 +10,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @ToString
-public class PaymentRejectedMessage {
+public class PaymentExecutedMessage {
     private Long accountId;
     private Long orderId;
     private BigDecimal orderPrice;
 //    private Long paymentId;
-    private String errorCode;
 }

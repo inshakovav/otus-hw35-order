@@ -1,22 +1,19 @@
 server:
   port: 8081
 
-order:
+app:
   kafka:
     message-group-name: order-group
     order-created-topic: hw35.order.created
-    payment-succeeded-topic: hw35.payment.succeeded
+    payment-executed-topic: hw35.payment.executed
     payment-rejected-topic: hw35.payment.rejected
-    warehouse-rejected-topic: hw35.warehouse.product.reservation.rejected
-    delivery-executed-topic: hw35.delivery.executed
-    delivery-rejected-topic: hw35.delivery.rejected
 
 spring:
   application:
     name: order
 
   datasource:
-    url: jdbc:postgresql://my-db-postgresql.default.svc.cluster.local:5432/db_otus_35
+    url: jdbc:postgresql://my-db-postgresql.default.svc.cluster.local:5432/db_otus_30
     username: ${DB_USER}
     password: ${DB_PASS}
     hikari:

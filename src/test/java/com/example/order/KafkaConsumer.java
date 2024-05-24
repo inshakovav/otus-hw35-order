@@ -18,7 +18,7 @@ public class KafkaConsumer {
     private String payload;
     private OrderCreatedMessage receivedMessage;
 
-    @KafkaListener(topics = "${order.kafka.order-created-topic}", groupId = "${order.kafka.message-group-name}")
+    @KafkaListener(topics = "${app.kafka.order-created-topic}", groupId = "${app.kafka.message-group-name}")
     public void receive(OrderCreatedMessage message) {
         log.info("received payload='{}'", message.toString());
 //        payload = message.toString();

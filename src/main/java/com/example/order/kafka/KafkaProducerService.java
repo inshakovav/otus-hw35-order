@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class KafkaProducerService {
 
-    @Value("${order.kafka.order-created-topic}")
+    @Value("${app.kafka.order-created-topic}")
     private String orderCreatedTopic;
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
